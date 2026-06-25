@@ -1,0 +1,139 @@
+////////////////////////////////////////////////////// day -1 //////////////////////////////////////////////////////////////////////
+thor@jump-host ~$ ssh steve@stapp02
+The authenticity of host 'stapp02 (10.244.240.112)' can't be established.
+ED25519 key fingerprint is SHA256:X8iaUz+xkJRO19vRZiGyw0Mgy8ga48b+EaARVlRv0O8.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'stapp02' (ED25519) to the list of known hosts.
+steve@stapp02's password: 
+[steve@stapp02 ~]$ cat /etc/shells
+/bin/sh
+/bin/bash
+/usr/bin/sh
+/usr/bin/bash
+/usr/bin/tmux
+/bin/tmux
+[steve@stapp02 ~]$ ^C
+[steve@stapp02 ~]$ which nologin
+/usr/sbin/nologin
+[steve@stapp02 ~]$ useradd -s /usr/sbin/nologin kirsty
+useradd: Permission denied.
+useradd: cannot lock /etc/passwd; try again later.
+[steve@stapp02 ~]$ sudo useradd -s /usr/sbin/nologin kirsty
+
+We trust you have received the usual lecture from the local System
+Administrator. It usually boils down to these three things:
+
+    #1) Respect the privacy of others.
+    #2) Think before you type.
+    #3) With great power comes great responsibility.
+
+[sudo] password for steve: 
+[steve@stapp02 ~]$ ^C
+
+
+thor@jump-host ~$ ssh -s tony@stapp01
+You must specify a subsystem to invoke.
+usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface] [-b bind_address]
+           [-c cipher_spec] [-D [bind_address:]port] [-E log_file]
+           [-e escape_char] [-F configfile] [-I pkcs11] [-i identity_file]
+           [-J destination] [-L address] [-l login_name] [-m mac_spec]
+           [-O ctl_cmd] [-o option] [-P tag] [-p port] [-R address]
+           [-S ctl_path] [-W host:port] [-w local_tun[:remote_tun]]
+           destination [command [argument ...]]
+       ssh [-Q query_option]
+thor@jump-host ~$ ssh tony@stapp01
+The authenticity of host 'stapp01 (10.244.240.131)' can't be established.
+ED25519 key fingerprint is SHA256:YMO/ZpzIwOGSC51i8h3rbkjEXeFLUy/ZHWud0oLBW64.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'stapp01' (ED25519) to the list of known hosts.
+tony@stapp01's password: 
+Permission denied, please try again.
+tony@stapp01's password: 
+[tony@stapp01 ~]$ sudo useradd -s /usr/sbin/nologin siva
+
+We trust you have received the usual lecture from the local System
+Administrator. It usually boils down to these three things:
+
+    #1) Respect the privacy of others.
+    #2) Think before you type.
+    #3) With great power comes great responsibility.
+
+[sudo] password for tony: 
+[tony@stapp01 ~]$ 
+
+//////////////////////////////////////////////////////////////////////day 2 /////////////////////////////////////////////////////////////////
+thor@jump-host ~$ ssh tony@stapp01
+The authenticity of host 'stapp01 (10.244.73.138)' can't be established.
+ED25519 key fingerprint is SHA256:7dzRAEhN01ISfjByGVm4SKmSeYvCOkmZ0ESTA2k5X8Q.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'stapp01' (ED25519) to the list of known hosts.
+tony@stapp01's password: 
+[tony@stapp01 ~]$ sudo -e 2027-03-28 jim
+
+We trust you have received the usual lecture from the local System
+Administrator. It usually boils down to these three things:
+
+    #1) Respect the privacy of others.
+    #2) Think before you type.
+    #3) With great power comes great responsibility.
+
+[sudo] password for tony: 
+sudo: 2027-03-28: editing files in a writable directory is not permitted
+sudo: jim: editing files in a writable directory is not permitted
+[tony@stapp01 ~]$ sudo useradd -e 2027-03-28 jim
+[tony@stapp01 ~]$ 
+
+
+////////////////////////////////////////////////////////////////////// day - 3 ///////////////////////////////////////////////////////////////////
+
+
+Losers visualize the penalties of failure, Winners visualize the rewards of success.
+
+Following a security audit, the xFusionCorp Industries security team has opted to enhance application and server security with SELinux. To initiate testing, the following requirements have been established for App server 1 in the Stratos Datacenter:
+
+
+task #########################
+Install the required SELinux packages.
+
+Permanently disable SELinux for the time being; it will be re-enabled after necessary configuration changes.
+
+No need to reboot the server, as a scheduled maintenance reboot is already planned for tonight.
+
+Disregard the current status of SELinux via the command line; the final status after the reboot should be disabled.
+
+# ###############################
+SSH connection and hostname mistake
+ ssh tony@stapp01 
+
+ Always check the infrastructure details carefully. One character matters.
+
+Becoming root  : sudo -i  (You became the administrator.)
+
+Checking the operating system
+cat /etc/os-release 
+
+Installing SELinux packages
+yum install selinux-policy selinux-policy-targeted policycoreutils -y   
+
+Editing SELinux configuration
+vi /etc/selinux/config
+
+Verification mindset
+grep SELINUX /etc/selinux/config
+
+
+////////////////////////////////////////////////////////////////////// day - 3 ///////////////////////////////////////////////////////////////////
+
+
+
+
+////////////////////////////////////////////////////////////////////// day - 3 ///////////////////////////////////////////////////////////////////
+
+
+
+
+
+////////////////////////////////////////////////////////////////////// day - 3 ///////////////////////////////////////////////////////////////////
