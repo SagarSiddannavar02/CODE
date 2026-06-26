@@ -128,6 +128,45 @@ grep SELINUX /etc/selinux/config
 ////////////////////////////////////////////////////////////////////// day - 3 ///////////////////////////////////////////////////////////////////
 
 
+its not skill its the will 
+    # Day 2 – Cron Jobs & Service Management
+
+## Task
+
+* Installed `cronie` on all three application servers.
+* Started the `crond` service.
+* Configured a root cron job to run every 5 minutes.
+
+## Commands Learned
+
+```bash
+ssh user@server
+sudo -i
+yum install cronie -y
+systemctl start crond
+systemctl status crond
+crontab -e
+crontab -l
+```
+
+## Key Concepts
+
+* **Cronie**: Package that provides the cron scheduler.
+* **crond**: Service (daemon) that executes scheduled jobs.
+* **Cron Job**: Automates command execution at specified times.
+* `*/5 * * * *` → Runs a command every 5 minutes.
+
+## Mistakes & Learnings
+
+* Mistyped package name (`cornie` instead of `cronie`).
+* Mistyped command (`corntab` instead of `crontab`).
+* Tried connecting to the wrong server (`stapp01` instead of `stapp03`).
+* Learned to read error messages and verify each step instead of guessing.
+
+## Takeaway
+
+Today's lab strengthened my understanding of Linux package management, service management, cron scheduling, SSH, and troubleshooting—essential skills for any DevOps engineer.
+
 
 
 ////////////////////////////////////////////////////////////////////// day - 3 ///////////////////////////////////////////////////////////////////
