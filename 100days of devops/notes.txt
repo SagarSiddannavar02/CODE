@@ -172,7 +172,277 @@ Today's lab strengthened my understanding of Linux package management, service m
 ////////////////////////////////////////////////////////////////////// day - 3 ///////////////////////////////////////////////////////////////////
 
 
+# Day – Passwordless SSH Authentication (SSH Keys)
+
+## Objective
+
+Configure passwordless SSH access from `thor` user on Jump Host to all App Servers using their respective users.
+
+## Concept
+
+SSH key authentication allows login without passwords.
+
+Flow:
+
+```
+Jump Host (thor)
+        |
+        | SSH Key
+        |
+App Servers
+(tony / steve / banner)
+```
+
+* Private key → stays on Jump Host
+* Public key → copied to remote server
+
+---
+
+## Steps Performed
+
+### 1. Check SSH keys
+
+```bash
+ls -la ~/.ssh
+```
+
+If keys are missing:
+
+```bash
+ssh-keygen
+```
+
+Generated:
+
+```
+id_ed25519        → Private key
+id_ed25519.pub    → Public key
+```
+
+---
+
+### 2. Copy public key to App Servers
+
+App Server 1:
+
+```bash
+ssh-copy-id tony@stapp01
+```
+
+App Server 2:
+
+```bash
+ssh-copy-id steve@stapp02
+```
+
+App Server 3:
+
+```bash
+ssh-copy-id banner@stapp03
+```
+
+---
+
+### 3. Test passwordless login
+
+```bash
+ssh tony@stapp01
+ssh steve@stapp02
+ssh banner@stapp03
+```
+
+Successful login without password confirms setup.
+
+---
+
+## Commands Learned
+
+```bash
+ssh user@server
+ssh-keygen
+ssh-copy-id user@server
+ls -la ~/.ssh
+```
+
+---
+
+## Mistakes & Learnings
+
+* `ssh copy id` ❌ → Correct: `ssh-copy-id`
+* `ssh_copy_id` ❌ → Correct command uses hyphen
+* `banner@stapp03` ❌ → Need SSH command:
+  `ssh banner@stapp03`
+* Spaces matter:
+  `ssh banner @stapp03` ❌
+
+---
+
+## Key Takeaway
+
+SSH keys enable secure automated server access without passwords. This is commonly used in DevOps tools like Ansible, Jenkins, and CI/CD pipelines.
 
 
 
 ////////////////////////////////////////////////////////////////////// day - 3 ///////////////////////////////////////////////////////////////////
+
+###########You don't get what you wish for. You get what you work for.################
+The only thing standing between you and outrageous success is continuous progress.
+
+
+# Day – Installing Ansible on Jump Host
+
+## Objective
+
+Install Ansible **version 4.8.0** on Jump Host using **pip3 only** and make it available globally for all users.
+
+---
+
+## Concepts Learned
+
+### Ansible Controller
+
+Jump Host acts as the Ansible Controller.
+
+```text
+Jump Host (thor)
+        |
+        |
+     Ansible
+        |
+        |
+Managed Servers
+```
+
+---
+
+## pip / pip3
+
+`pip3` is Python package manager used to install Python-based tools.
+
+Check pip:
+
+```bash
+pip3 --version
+```
+
+---
+
+## Installing Ansible
+
+Install specific version:
+
+```bash
+pip3 install ansible==4.8.0
+```
+
+Issue:
+
+* Installed as user package.
+
+Check:
+
+```bash
+which ansible
+```
+
+Output:
+
+```text
+/home/thor/.local/bin/ansible
+```
+
+Meaning:
+
+* Only thor user can access it.
+
+---
+
+## Global Installation
+
+Remove user installation:
+
+```bash
+pip3 uninstall ansible -y
+```
+
+Install globally:
+
+```bash
+sudo pip3 install ansible==4.8.0
+```
+
+Purpose:
+
+* Installs Ansible system-wide.
+* All users can run Ansible commands.
+
+---
+
+## Verification
+
+Check location:
+
+```bash
+which ansible
+```
+
+Expected:
+
+```text
+/usr/local/bin/ansible
+```
+
+Check version:
+
+```bash
+ansible --version
+```
+
+---
+
+## Important Learning
+
+User installation:
+
+```text
+/home/user/.local/bin
+```
+
+Only that user can run it.
+
+Global installation:
+
+```text
+/usr/local/bin
+```
+
+All users can run it.
+
+---
+
+## Troubleshooting Learned
+
+Mistake:
+
+```bash
+pip install version==4.8.0
+```
+
+Wrong package name.
+
+Correct:
+
+```bash
+pip3 install ansible==4.8.0
+```
+
+---
+
+## DevOps Takeaway
+
+Before installing tools:
+
+1. Check existing version.
+2. Check installation location.
+3. Understand user vs global installation.
+4. Verify after installation.
